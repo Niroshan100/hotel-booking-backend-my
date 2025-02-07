@@ -4,17 +4,21 @@ import userRouter from './routes/usersRoute.js';
 import mongoose from 'mongoose';
 import galleryItemRouter from "./routes/galleryItemRoute.js";
 import jwt from 'jsonwebtoken';  // ✅ Fixed import statement
+import dotenv from 'dotenv';
+
+dotenv.config();  // ✅ Added dotenv.config() to load environment variables from .env file
 
 const app = express();
 app.use(bodyParser.json());
 
-const connectionString = "mongodb+srv://niro_max:1234@cluster0.w25id.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const connectionString = process.env.MONGO_URL;
 
 app.use((req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");  // ✅ Fixed "Autherization" typo & missing space
   
   if (token) {
-    jwt.verify(token, "secret", (err, decoded) => {
+    jwt.verify(token, process.env.JWT_KEY,
+      (err, decoded) => {
       if (decoded) {
         req.user = decoded;
       }
