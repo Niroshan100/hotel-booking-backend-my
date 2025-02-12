@@ -24,11 +24,11 @@ const userSchema = mongoose.Schema({
       default : "customer"
     },
     whatsApp : {
-      type : String,
+      type: Number,
       required : true
     },
     phone : {
-      type : String,
+      type: Number,
       required : true
     },
     disabled : {

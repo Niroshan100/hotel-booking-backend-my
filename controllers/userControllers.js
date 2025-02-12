@@ -6,7 +6,7 @@ dotenv.config();
 
 // 📌 Register User (Sign Up)
 export function postUsers(req, res) {
-  const { email, password, firstName, lastName, type } = req.body;
+  const { email, password, firstName, lastName, type, whatsApp, phone } = req.body;
 
   // Hash password before storing
   bcrypt.hash(password, 10, (err, passwordHash) => {
@@ -19,7 +19,9 @@ export function postUsers(req, res) {
       password: passwordHash, // Store hashed password
       firstName,
       lastName,
-      type
+      type,
+      whatsApp,
+      phone
     });
 
     newUser.save()
