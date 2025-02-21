@@ -6,6 +6,7 @@ import galleryItemRouter from "./routes/galleryItemRoute.js";
 import jwt from 'jsonwebtoken';  // ✅ Fixed import statement
 import dotenv from 'dotenv';
 import categoryRouter from './routes/categoryRoute.js';
+import roomRouter from './routes/roomRoute.js';
 
 dotenv.config();  // ✅ Added dotenv.config() to load environment variables from .env file
 
@@ -41,7 +42,7 @@ mongoose.connect(connectionString)
 app.use("/api/users", userRouter);
 app.use("/api/gallery", galleryItemRouter); 
 app.use("/api/category", categoryRouter);
-
+app.use("/api/rooms",roomRouter);
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
